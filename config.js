@@ -3,5 +3,5 @@
 // La clé "anon" peut être présente dans le site. NE METS JAMAIS la clé service_role ici.
 window.DEMANDES_CONFIG = {
   url: "scftgimuodfrjfbvxjti",
-  anonKey: "eu-west-1"
+  anonKey: "sb_publishable_-7BhqKGIM0fc-YowKTLS4A_oeK_Q0JP"
 };
