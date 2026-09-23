@@ -3,28 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Demandes — Gestion</title>
-<!-- CONFIG: remplace REMPLACE-MOI dans l'action du formulaire par ton endpoint Formspree. -->
+<title>📨 Demandes — partagé</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0b1220;color:#e5e7eb}
 header{background:#111827;padding:20px;text-align:center;border-bottom:1px solid #334155}header h1{margin:0;font-size:30px}header p{color:#94a3b8}
-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px;background:#111827}button{border:0;border-radius:10px;padding:11px 15px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}button:hover{filter:brightness(1.1)}button.ok{background:#16a34a}button.danger{background:#dc2626}button.gray{background:#475569}button.orange{background:#d97706}
-main{max-width:1100px;margin:auto;padding:18px}.page.hidden,.hidden{display:none!important}.card{background:#172033;border:1px solid #334155;border-radius:15px;padding:20px;margin-bottom:16px}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px;background:#111827}
+button{border:0;border-radius:10px;padding:11px 15px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.1)}button.ok{background:#16a34a}button.danger{background:#dc2626}button.gray{background:#475569}button.orange{background:#d97706}
+main{max-width:1100px;margin:auto;padding:18px}.hidden{display:none!important}.card{background:#172033;border:1px solid #334155;border-radius:15px;padding:20px;margin-bottom:16px}
 label{display:block;margin:12px 0 6px;font-weight:bold}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #475569;background:#0f172a;color:#fff;font-size:16px}textarea{min-height:120px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1;min-width:130px}.item{background:#101827;border:1px solid #475569;border-radius:12px;padding:15px;margin:12px 0}.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:12px;background:#92400e}.badge.ok{background:#166534}.badge.no{background:#991b1b}.small{font-size:13px;color:#94a3b8}.notice{background:#172554;border:1px solid #1d4ed8;border-radius:10px;padding:12px;margin:10px 0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1;min-width:130px}.item{background:#101827;border:1px solid #475569;border-radius:12px;padding:15px;margin:12px 0}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:12px;background:#92400e}.badge.ok{background:#166534}.badge.no{background:#991b1b}
+.small{font-size:13px;color:#94a3b8}.notice{background:#172554;border:1px solid #1d4ed8;border-radius:10px;padding:12px;margin:10px 0}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.stat{padding:18px;border-radius:12px;background:#0f172a;border:1px solid #334155}.stat b{font-size:28px;display:block;margin-top:5px}
 table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #334155;text-align:left}th{color:#93c5fd}.pill{padding:4px 8px;border-radius:999px;background:#334155;font-size:12px}
-@media(max-width:600px){header h1{font-size:24px}main{padding:10px}.card{padding:15px}.actions{display:grid;grid-template-columns:1fr}nav button{flex:1;min-width:100px}table{font-size:13px}}
-
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999}
-.modal.hidden{display:none}.modalbox{width:min(560px,100%);background:#172033;border:1px solid #475569;border-radius:16px;padding:20px;box-shadow:0 20px 60px #0008}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999}.modal.hidden{display:none}
+.modalbox{width:min(560px,100%);background:#172033;border:1px solid #475569;border-radius:16px;padding:20px;box-shadow:0 20px 60px #0008}
 .modalbox h3{margin-top:0}.modalbox .actions{margin-top:16px}.modalbox .actions button{flex:1}
+@media(max-width:600px){header h1{font-size:24px}main{padding:10px}.card{padding:15px}.actions{display:grid;grid-template-columns:1fr}nav button{flex:1;min-width:100px}table{font-size:13px}}
 </style>
 </head>
 <body>
 <header>
 <h1>📨 Demandes</h1>
-<p>Questions, rendez-vous, messages et gestion de l'équipe</p>
+<p>Version partagée — les demandes sont enregistrées dans une base en ligne</p>
 <div id="clock"></div>
 </header>
 <nav>
@@ -34,210 +36,188 @@ table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px s
 <button id="adminBtn" class="hidden" onclick="showPage('admin')">⚙️ Gestion</button>
 <button id="logoutBtn" class="gray hidden" onclick="logout()">Déconnexion</button>
 </nav>
-
 <main>
-<section id="home" class="page">
-<div class="card"><h2>Bienvenue</h2><p>Crée un compte pour envoyer et suivre tes demandes.</p>
+<section id="home">
+<div class="card"><h2>Bienvenue</h2>
+<p>Cette version utilise Supabase pour partager les comptes et les demandes entre téléphone, PC et autres appareils.</p>
+<div id="setupNotice" class="notice"></div>
 <div class="actions"><button onclick="showPage('register')">📝 S'inscrire</button><button onclick="showPage('login')">🔐 Se connecter</button></div></div>
-<div class="card"><h3>Équipe</h3><p>Andry et l'administrateur peuvent tout gérer. Les autres membres disposent uniquement des permissions qui leur sont attribuées.</p></div>
+<div class="card"><h3>Équipe</h3><p>Mathis et Andry ont tous les droits. Les autres membres utilisent les permissions que tu leur donnes.</p></div>
 </section>
 
-<section id="register" class="page hidden"><div class="card"><h2>📝 Inscription</h2>
+<section id="register" class="hidden"><div class="card"><h2>📝 Inscription demandeur</h2>
 <form id="registerForm"><label>Identifiant / Snap *</label><input id="regSnap" required placeholder="@tonpseudo">
 <label>Mot de passe *</label><input id="regPass" type="password" minlength="4" required>
 <label>Confirmation *</label><input id="regPass2" type="password" minlength="4" required>
-<button type="submit">Créer mon compte</button></form></div></section>
+<button type="submit">Créer mon compte</button></form>
+<p class="small">Le compte est partagé en ligne. Tu pourras ensuite retrouver tes demandes depuis un autre appareil.</p></div></section>
 
-<section id="request" class="page hidden"><div class="card"><h2>📨 Nouvelle demande</h2><div id="requestNotice" class="notice"></div>
-<form id="requestForm" action="https://formspree.io/f/REMPLACE-MOI" method="POST">
-<input type="hidden" name="_subject" value="📨 Nouvelle demande">
-<label>Identifiant / Snap *</label><input id="reqSnap" name="snap" required>
-<label>Type *</label><select id="reqType" name="type" required><option value="">Choisir...</option><option>Question</option><option>Rendez-vous</option><option>Autre</option></select>
-<label>Question / sujet *</label><textarea id="reqQuestion" name="question" required></textarea><label>Date souhaitée *</label><input id="reqDate" name="date" type="date" required>
-<label>Lieu <span="small">(optionnel)</span></label><input id="reqLieu" name="lieu">
+<section id="request" class="hidden"><div class="card"><h2>📨 Nouvelle demande</h2><div id="requestNotice" class="notice"></div>
+<form id="requestForm"><label>Identifiant / Snap *</label><input id="reqSnap" required>
+<label>Type *</label><select id="reqType" required><option value="">Choisir...</option><option>Question</option><option>Rendez-vous</option><option>Autre</option></select>
+<label>Question / sujet *</label><textarea id="reqQuestion" required></textarea>
+<label>Date souhaitée *</label><input id="reqDate" type="date" required>
+<label>Lieu <span class="small">(optionnel)</span></label><input id="reqLieu">
 <button type="submit">Envoyer la demande</button></form></div></section>
 
-<section id="login" class="page hidden"><div class="card"><h2>🔐 Connexion</h2>
+<section id="login" class="hidden"><div class="card"><h2>🔐 Connexion</h2>
 <select id="loginKind" onchange="updateLoginForm()"><option value="member">Membre de l'équipe</option><option value="user">Demandeur</option></select>
 <div id="memberLogin"><form id="memberForm"><label>Identifiant</label><input id="memberId" required><label>Mot de passe</label><input id="memberPass" type="password" required><button>Connexion équipe</button></form></div>
 <div id="userLogin" class="hidden"><form id="userForm"><label>Identifiant / Snap</label><input id="loginSnap" required><label>Mot de passe</label><input id="loginPass" type="password" required><button>Connexion demandeur</button></form></div>
-<p class="small">Comptes équipe : <b>Mathis / Mathis2026!</b>, <b>Andry / Andry2026!</b>, <b>Joshua / Joshua2026!</b>, <b>Secretaire / Secret2026!</b>.</p>
 </div></section>
 
-<section id="dashboard" class="page hidden"><div class="card"><h2>📋 Espace personnel</h2><p id="identity"></p></div>
-<div id="passwordCard" class="card"><h3>🔑 Changer mon mot de passe</h3><form id="passwordForm"><label>Ancien mot de passe</label><input id="oldPass" type="password" required><label>Nouveau mot de passe</label><input id="newPass" type="password" minlength="4" required><label>Confirmation</label><input id="newPass2" type="password" minlength="4" required><button>Changer</button></form></div>
+<section id="dashboard" class="hidden"><div class="card"><h2>📋 Espace personnel</h2><p id="identity"></p></div>
 <div class="card"><h2 id="listTitle">Mes demandes</h2><div id="list"></div></div></section>
 
-<section id="admin" class="page hidden"><div class="card"><h2>⚙️ Gestion de l'équipe</h2>
-<p id="adminInfo"></p>
-<div class="notice">Si les comptes initiaux ne fonctionnent pas, utilise le bouton ci-dessous : il recrée uniquement les comptes Mathis, Andry, Joshua et Secretaire s'ils sont absents, sans supprimer tes autres membres.</div>
-<button class="orange" onclick="repairDefaultAccounts()">🔧 Réparer les comptes initiaux</button>
+<section id="admin" class="hidden"><div class="card"><h2>⚙️ Gestion de l'équipe</h2><p id="adminInfo"></p>
 <div class="grid"><div class="stat">Membres <b id="memberCount">0</b></div><div class="stat">Demandes <b id="requestCount">0</b></div><div class="stat">En attente <b id="pendingCount">0</b></div></div></div>
-
-<div class="card"><h2>➕ Ajouter une personne</h2><form id="addMemberForm"><label>Identifiant</label><input id="newId" required placeholder="ex. Joshua"><label>Mot de passe</label><input id="newMemberPass" minlength="4" required><label>Rôle</label><input id="newRole" required placeholder="ex. Secrétaire"><label>Permissions</label>
-<div class="grid">
-<label><input type="checkbox" class="perm" value="reply" checked> Répondre</label>
+<div class="card"><h2>➕ Ajouter une personne</h2><form id="addMemberForm">
+<label>Identifiant</label><input id="newId" required><label>Mot de passe</label><input id="newMemberPass" minlength="4" required>
+<label>Rôle</label><input id="newRole" required><label>Permissions</label>
+<div class="grid"><label><input type="checkbox" class="perm" value="reply" checked> Répondre</label>
 <label><input type="checkbox" class="perm" value="delete"> Supprimer</label>
 <label><input type="checkbox" class="perm" value="validate"> Valider/refuser</label>
-<label><input type="checkbox" class="perm" value="manageMembers"> Gérer les membres</label>
-</div><button type="submit">Ajouter la personne</button></form></div>
-
+<label><input type="checkbox" class="perm" value="manageMembers"> Gérer les membres</label></div>
+<button type="submit">Ajouter la personne</button></form></div>
 <div class="card"><h2>👥 Membres et rôles</h2><div style="overflow:auto"><table><thead><tr><th>Identifiant</th><th>Rôle</th><th>Permissions</th><th>Actions</th></tr></thead><tbody id="membersTable"></tbody></table></div></div>
 </section>
 </main>
-<div id="modal" class="modal hidden">
-  <div class="modalbox">
-    <h3 id="modalTitle">Action</h3>
-    <div id="modalBody"></div>
-    <div class="actions">
-      <button class="gray" data-action="closeModal">Annuler</button>
-      <button id="modalOk" class="ok" data-action="modalOk">Confirmer</button>
-    </div>
-  </div>
-</div>
+
+<div id="modal" class="modal hidden"><div class="modalbox"><h3 id="modalTitle">Action</h3><div id="modalBody"></div><div class="actions">
+<button class="gray" data-action="closeModal">Annuler</button><button id="modalOk" class="ok" data-action="modalOk">Confirmer</button></div></div></div>
 <div id="toast" style="position:fixed;bottom:20px;right:20px;display:none;background:#111827;border:1px solid #475569;padding:13px 16px;border-radius:10px"></div>
 
+<script src="config.js"></script>
 <script>
-const DEFAULT_MEMBERS={
- Mathis:{password:"Mathis2026!",role:"Administrateur",permissions:["all"]},
- Andry:{password:"Andry2026!",role:"Andry",permissions:["all"]},
- Joshua:{password:"Joshua2026!",role:"Juge",permissions:["validate"]},
- Secretaire:{password:"Secret2026!",role:"Secrétaire / Porte-parole",permissions:["reply","delete"]}
-};
-let session=null;
+/*
+  IMPORTANT:
+  1) Create a Supabase project.
+  2) Run supabase.sql in Supabase > SQL Editor.
+  3) Put your Supabase URL and anon key in config.js.
+*/
+const SUPABASE_URL = window.DEMANDES_CONFIG?.url || "";
+const SUPABASE_ANON_KEY = window.DEMANDES_CONFIG?.anonKey || "";
+let session = null;
+let modalState = null;
 
-const get=(k,d)=>JSON.parse(localStorage.getItem(k)||JSON.stringify(d));
-const set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-function init(){
-  let m=get("members",{});
-  for(const [id,x] of Object.entries(DEFAULT_MEMBERS)) if(!m[id]) m[id]=x;
-  set("members",m);
-  updateUI();
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+function configured(){ return /^https:\/\/.+\.supabase\.co$/.test(SUPABASE_URL) && SUPABASE_ANON_KEY.length>20; }
+function headers(){ return {"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json","Prefer":"return=representation"}; }
+async function api(path, options={}){
+  if(!configured()) throw new Error("Supabase non configuré.");
+  const r=await fetch(SUPABASE_URL+"/rest/v1/"+path,{...options,headers:{...headers(),...(options.headers||{})}});
+  const txt=await r.text(); let data=null; try{data=txt?JSON.parse(txt):null}catch{}
+  if(!r.ok) throw new Error(data?.message||data?.error_description||txt||("HTTP "+r.status));
+  return data;
 }
-function toast(s){const t=document.getElementById("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",2200)}
-function can(p){return session?.type==="team" && (session.permissions.includes("all")||session.permissions.includes(p))}
-function showPage(id){document.querySelectorAll(".page").forEach(x=>x.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");updateUI();if(id==="dashboard")render();if(id==="admin")renderAdmin();if(id==="request")prepareRequest();}
-function updateUI(){document.getElementById("logoutBtn").classList.toggle("hidden",!session);document.getElementById("dashBtn").classList.toggle("hidden",!session);document.getElementById("adminBtn").classList.toggle("hidden",!can("manageMembers"));document.getElementById("passwordCard").classList.toggle("hidden",session?.type!=="user");}
-function prepareRequest(){const n=document.getElementById("requestNotice"),i=document.getElementById("reqSnap");if(session?.type==="user"){i.value=session.id;i.readOnly=true;n.textContent="Connecté avec "+session.id+"."}else{i.readOnly=false;n.textContent="Connecte-toi ou inscris-toi pour lier la demande à ton compte."}}
-document.getElementById("registerForm").onsubmit=e=>{e.preventDefault();const id=document.getElementById("regSnap").value.trim(),p=document.getElementById("regPass").value,p2=document.getElementById("regPass2").value;if(p!==p2)return toast("Les mots de passe ne correspondent pas.");const a=get("accounts",{});if(a[id])return toast("Cet identifiant est déjà inscrit.");a[id]={password:p};set("accounts",a);session={type:"user",id};toast("Compte créé !");showPage("dashboard")};
-document.getElementById("requestForm").addEventListener("submit",async e=>{
-  e.preventDefault();
-  const form=e.currentTarget;
-  if(form.action.includes("REMPLACE-MOI")) return toast("Configure d'abord Formspree dans index.html.");
-  try{
-    const res=await fetch(form.action,{method:"POST",body:new FormData(form),headers:{"Accept":"application/json"}});
-    if(!res.ok) throw new Error("send");
-    const id=document.getElementById("reqSnap").value.trim();
-    const r=get("requests",[]);
-    r.push({id:Date.now(),snap:id,type:document.getElementById("reqType").value,question:document.getElementById("reqQuestion").value,date:document.getElementById("reqDate").value,lieu:document.getElementById("reqLieu").value,status:"Envoyée",reply:"",replyBy:"",created:new Date().toLocaleString("fr-FR")});
-    set("requests",r);
-    toast("✅ Demande envoyée !");
-    form.reset();
-    if(session?.type==="user") document.getElementById("reqSnap").value=session.id;
-    showPage("dashboard");
-  }catch(err){toast("❌ Impossible d'envoyer la demande.");}
-});
-document.getElementById("memberForm").onsubmit=e=>{e.preventDefault();const id=document.getElementById("memberId").value.trim(),p=document.getElementById("memberPass").value,m=get("members",DEFAULT_MEMBERS),x=m[id];if(!x||x.password!==p)return toast("Identifiant ou mot de passe incorrect.");session={type:"team",id,role:x.role,permissions:x.permissions};toast("Connexion réussie.");showPage("dashboard")};
-document.getElementById("userForm").onsubmit=e=>{e.preventDefault();const id=document.getElementById("loginSnap").value.trim(),p=document.getElementById("loginPass").value,a=get("accounts",{});if(!a[id]||a[id].password!==p)return toast("Identifiant ou mot de passe incorrect.");session={type:"user",id};toast("Connexion réussie.");showPage("dashboard")};
-document.getElementById("passwordForm").onsubmit=e=>{e.preventDefault();if(session?.type!=="user")return;const a=get("accounts",{}),o=document.getElementById("oldPass").value,n=document.getElementById("newPass").value,n2=document.getElementById("newPass2").value;if(!a[session.id]||a[session.id].password!==o)return toast("Ancien mot de passe incorrect.");if(n!==n2)return toast("Confirmation incorrecte.");a[session.id].password=n;set("accounts",a);e.target.reset();toast("Mot de passe changé.")};
-function render(){let list=get("requests",[]),box=document.getElementById("list");if(session?.type==="user"){list=list.filter(r=>r.snap===session.id);identity.textContent="👤 Demandeur : "+session.id;listTitle.textContent="Mes demandes"}else{identity.textContent="👤 Équipe : "+session.id+" — "+session.role;listTitle.textContent="Toutes les demandes"}if(!list.length){box.innerHTML="<p>Aucune demande.</p>";return}box.innerHTML=list.map(r=>`<div class="item"><span class="badge ${r.status==="Validée"?"ok":r.status==="Refusée"?"no":""}">${esc(r.status)}</span><p><b>Snap :</b> ${esc(r.snap)}</p><p><b>Type :</b> ${esc(r.type)}</p><p><b>Sujet :</b><br>${esc(r.question)}</p><p><b>Date :</b> ${esc(r.date)}${r.lieu?"<br><b>Lieu :</b> "+esc(r.lieu):""}</p><p class="small">Envoyée le ${esc(r.created)}</p>${r.reply?`<div class="notice"><b>💬 Réponse de ${esc(r.replyBy)} :</b><br>${esc(r.reply)}</div>`:""}${session?.type==="team"?`<div class="actions">${can("reply")?`<button data-action="reply" data-id="${r.id}">💬 Répondre</button>`:""}${can("delete")?`<button class="gray" data-action="deleteRequest" data-id="${r.id}">🗑️ Supprimer</button>`:""}${can("validate")?`<button class="ok" data-action="validate" data-id="${r.id}">✅ Valider</button><button class="danger" data-action="refuse" data-id="${r.id}">❌ Refuser</button>`:""}</div>`:""}</div>`).join("")}
-let modalState=null;
-function openModal(title, body, okLabel, callback){
-  document.getElementById("modalTitle").textContent=title;
-  document.getElementById("modalBody").innerHTML=body;
-  document.getElementById("modalOk").textContent=okLabel||"Confirmer";
-  document.getElementById("modal").classList.remove("hidden");
-  modalState=callback;
+async function sha256(text){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(text));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("");}
+function toast(s){const t=$("toast");t.textContent=s;t.style.display="block";setTimeout(()=>t.style.display="none",2500)}
+function showPage(id){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"));$(id).classList.remove("hidden");updateUI();if(id==="dashboard")render();if(id==="admin")renderAdmin();if(id==="request")prepareRequest();}
+function can(p){return session?.type==="team" && (session.permissions.includes("all")||session.permissions.includes(p));}
+function updateUI(){$("logoutBtn").classList.toggle("hidden",!session);$("dashBtn").classList.toggle("hidden",!session);$("adminBtn").classList.toggle("hidden",!can("manageMembers"));}
+function prepareRequest(){const n=$("requestNotice"),i=$("reqSnap");if(session?.type==="user"){i.value=session.id;i.readOnly=true;n.textContent="Connecté avec "+session.id+"."}else{i.readOnly=false;n.textContent="Tu peux envoyer une demande avec ton identifiant de compte."}}
+function setSetupNotice(){$("setupNotice").innerHTML=configured()?"✅ Base en ligne configurée. Les demandes sont partagées entre les appareils.":"⚠️ Configure d'abord <b>config.js</b> avec l'URL et la clé anon de Supabase.";}
+
+/* Accounts */
+async function getMember(id){const a=await api("members?select=*&username=eq."+encodeURIComponent(id)+"&limit=1");return a?.[0]||null;}
+async function getUser(id){const a=await api("users?select=*&username=eq."+encodeURIComponent(id)+"&limit=1");return a?.[0]||null;}
+
+$("registerForm").onsubmit=async e=>{
+ e.preventDefault(); if(!configured())return toast("Configure Supabase d'abord.");
+ const id=$("regSnap").value.trim(),p=$("regPass").value,p2=$("regPass2").value;
+ if(p!==p2)return toast("Les mots de passe ne correspondent pas.");
+ try{
+   if(await getUser(id)) return toast("Cet identifiant existe déjà.");
+   await api("users",{method:"POST",body:JSON.stringify({username:id,password_hash:await sha256(p)})});
+   session={type:"user",id};toast("Compte créé !");showPage("dashboard");
+ }catch(err){toast(err.message)}
+};
+
+$("userForm").onsubmit=async e=>{
+ e.preventDefault();try{
+   const id=$("loginSnap").value.trim(),x=await getUser(id);
+   if(!x||x.password_hash!==(await sha256($("loginPass").value)))return toast("Identifiant ou mot de passe incorrect.");
+   session={type:"user",id};toast("Connexion réussie.");showPage("dashboard");
+ }catch(err){toast(err.message)}
+};
+
+$("memberForm").onsubmit=async e=>{
+ e.preventDefault();try{
+   const id=$("memberId").value.trim(),x=await getMember(id);
+   if(!x||x.password_hash!==(await sha256($("memberPass").value)))return toast("Identifiant ou mot de passe incorrect.");
+   session={type:"team",id,role:x.role,permissions:x.permissions||[]};toast("Connexion réussie.");showPage("dashboard");
+ }catch(err){toast(err.message)}
+};
+
+$("requestForm").onsubmit=async e=>{
+ e.preventDefault();if(!configured())return toast("Configure Supabase d'abord.");
+ const id=$("reqSnap").value.trim();
+ try{
+   if(!await getUser(id))return toast("Ce compte demandeur n'existe pas.");
+   await api("requests",{method:"POST",body:JSON.stringify({snap:id,type:$("reqType").value,question:$("reqQuestion").value,date:$("reqDate").value,lieu:$("reqLieu").value||null,status:"En attente"})});
+   toast("Demande envoyée !");e.target.reset();if(session?.type==="user"){$("reqSnap").value=session.id;$("reqSnap").readOnly=true}showPage("dashboard");
+ }catch(err){toast(err.message)}
+};
+
+async function loadRequests(){
+ const q=session?.type==="user"?"&snap=eq."+encodeURIComponent(session.id):"";
+ return await api("requests?select=*&order=created_at.desc"+q);
 }
-function closeModal(){document.getElementById("modal").classList.add("hidden");modalState=null}
-function replyRequest(id){
-  if(!can("reply")) return toast("Permission refusée.");
-  openModal("💬 Répondre à la demande",
-    '<label>Réponse</label><textarea id="modalText" placeholder="Écris ta réponse ici..."></textarea>',
-    "Envoyer", ()=>{
-      const msg=document.getElementById("modalText").value.trim();
-      if(!msg) return toast("Écris une réponse.");
-      const a=get("requests",[]),i=a.findIndex(r=>r.id===id);
-      if(i<0) return toast("Demande introuvable.");
-      a[i].reply=msg;a[i].replyBy=session.id;set("requests",a);closeModal();render();toast("Réponse envoyée.");
-    });
+async function render(){
+ if(!session)return;
+ try{
+   const list=await loadRequests();$("identity").textContent=session.type==="user"?"👤 Demandeur : "+session.id:"👤 Équipe : "+session.id+" — "+session.role;
+   $("listTitle").textContent=session.type==="user"?"Mes demandes":"Toutes les demandes";
+   $("list").innerHTML=list.length?list.map(r=>`<div class="item"><span class="badge ${r.status==="Validée"?"ok":r.status==="Refusée"?"no":""}">${esc(r.status)}</span>
+   <p><b>Snap :</b> ${esc(r.snap)}</p><p><b>Type :</b> ${esc(r.type)}</p><p><b>Sujet :</b><br>${esc(r.question)}</p>
+   <p><b>Date :</b> ${esc(r.date)}${r.lieu?"<br><b>Lieu :</b> "+esc(r.lieu):""}</p>
+   <p class="small">Envoyée le ${esc(new Date(r.created_at).toLocaleString("fr-FR"))}</p>
+   ${r.reply?`<div class="notice"><b>💬 Réponse de ${esc(r.reply_by||"équipe")} :</b><br>${esc(r.reply)}</div>`:""}
+   ${session.type==="team"?`<div class="actions">${can("reply")?`<button data-action="reply" data-id="${r.id}">💬 Répondre</button>`:""}${can("delete")?`<button class="gray" data-action="delete" data-id="${r.id}">🗑️ Supprimer</button>`:""}${can("validate")?`<button class="ok" data-action="validate" data-id="${r.id}">✅ Valider</button><button class="danger" data-action="refuse" data-id="${r.id}">❌ Refuser</button>`:""}</div>`:""}
+   </div>`).join(""):"<p>Aucune demande.</p>";
+ }catch(err){$("list").innerHTML="<p>Erreur : "+esc(err.message)+"</p>";}
 }
-function statusRequest(id,status){
-  if(!can("validate")) return toast("Permission refusée.");
-  const a=get("requests",[]),i=a.findIndex(r=>r.id===id);
-  if(i<0) return toast("Demande introuvable.");
-  a[i].status=status;set("requests",a);render();toast(status);
+async function renderAdmin(){
+ if(!can("manageMembers"))return;
+ try{
+  const m=await api("members?select=*&order=username"),r=await api("requests?select=id,status");
+  $("memberCount").textContent=m.length;$("requestCount").textContent=r.length;$("pendingCount").textContent=r.filter(x=>x.status==="En attente").length;
+  $("membersTable").innerHTML=m.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.role)}</td><td>${x.permissions?.includes("all")?"Tout":(x.permissions||[]).map(esc).join(", ")}</td><td>${x.username===session.id?"<span class='pill'>Compte actuel</span>":`<button class="orange" data-action="editMember" data-id="${encodeURIComponent(x.username)}">Modifier</button> <button class="danger" data-action="removeMember" data-id="${encodeURIComponent(x.username)}">Supprimer</button>`}</td></tr>`).join("");
+ }catch(err){toast(err.message)}
 }
-function deleteRequest(id){
-  if(!can("delete")) return toast("Permission refusée.");
-  openModal("🗑️ Supprimer la demande","<p>Cette demande sera supprimée définitivement.</p>","Supprimer",()=>{
-    const a=get("requests",[]);set("requests",a.filter(r=>r.id!==id));closeModal();render();toast("Demande supprimée.");
-  });
+$("addMemberForm").onsubmit=async e=>{
+ e.preventDefault();if(!can("manageMembers"))return;
+ const id=$("newId").value.trim(),pass=$("newMemberPass").value,role=$("newRole").value.trim(),permissions=[...document.querySelectorAll(".perm:checked")].map(x=>x.value);
+ try{if(await getMember(id))return toast("Cet identifiant existe déjà.");await api("members",{method:"POST",body:JSON.stringify({username:id,password_hash:await sha256(pass),role,permissions})});e.target.reset();document.querySelector('.perm[value="reply"]').checked=true;toast("Membre ajouté.");renderAdmin()}catch(err){toast(err.message)}
+};
+
+function openModal(title,body,ok,cb){$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modalOk").textContent=ok;$("modal").classList.remove("hidden");modalState=cb;}
+function closeModal(){$("modal").classList.add("hidden");modalState=null;}
+async function replyRequest(id){
+ if(!can("reply"))return toast("Permission refusée.");
+ openModal("💬 Répondre à la demande",'<label>Réponse</label><textarea id="modalText"></textarea>','Envoyer',async()=>{
+   const msg=$("modalText").value.trim();if(!msg)return toast("Écris une réponse.");
+   try{await api("requests?id=eq."+id,{method:"PATCH",body:JSON.stringify({reply:msg,reply_by:session.id})});closeModal();render();toast("Réponse envoyée.")}catch(err){toast(err.message)}
+ });
 }
-function repairDefaultAccounts(){
-  if(!can("manageMembers")) return toast("Accès administrateur requis.");
-  let m=get("members",{});
-  const defaults={
-    Mathis:{password:"Mathis2026!",role:"Administrateur",permissions:["all"]},
-    Andry:{password:"Andry2026!",role:"Andry",permissions:["all"]},
-    Joshua:{password:"Joshua2026!",role:"Juge",permissions:["validate"]},
-    Secretaire:{password:"Secret2026!",role:"Secrétaire / Porte-parole",permissions:["reply","delete"]}
-  };
-  let changed=0;
-  for(const [id,x] of Object.entries(defaults)){ if(!m[id]){m[id]=x;changed++;} }
-  set("members",m); renderAdmin(); toast(changed ? "Comptes initiaux réparés." : "Les comptes sont déjà présents.");
+async function statusRequest(id,status){if(!can("validate"))return toast("Permission refusée.");try{await api("requests?id=eq."+id,{method:"PATCH",body:JSON.stringify({status})});render();toast(status)}catch(err){toast(err.message)}}
+async function deleteRequest(id){if(!can("delete"))return toast("Permission refusée.");openModal("🗑️ Supprimer","<p>Cette demande sera supprimée définitivement.</p>","Supprimer",async()=>{try{await api("requests?id=eq."+id,{method:"DELETE"});closeModal();render();toast("Demande supprimée.")}catch(err){toast(err.message)}})}
+async function editMember(enc){
+ const id=decodeURIComponent(enc);const m=await getMember(id);if(!m)return toast("Membre introuvable.");
+ const perms=["reply","delete","validate","manageMembers"];
+ openModal("✏️ Modifier "+esc(id),`<label>Rôle</label><input id="editRole" value="${esc(m.role)}"><label>Nouveau mot de passe (facultatif)</label><input id="editPass" type="password"><label>Permissions</label><div class="grid">${perms.map(p=>`<label><input type="checkbox" class="editPerm" value="${p}" ${m.permissions?.includes("all")||m.permissions?.includes(p)?"checked":""}> ${p}</label>`).join("")}</div>`,"Enregistrer",async()=>{
+  const role=$("editRole").value.trim();if(!role)return toast("Le rôle est obligatoire.");
+  const pass=$("editPass").value,permissions=[...document.querySelectorAll(".editPerm:checked")].map(x=>x.value);const body={role,permissions:permissions.length===4?["all"]:permissions};if(pass)body.password_hash=await sha256(pass);
+  try{await api("members?username=eq."+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify(body)});if(session.id===id){session.role=role;session.permissions=body.permissions}closeModal();renderAdmin();updateUI();toast("Membre modifié.")}catch(err){toast(err.message)}
+ });
 }
-function renderAdmin(){if(!can("manageMembers"))return showPage("dashboard");const m=get("members",{}),r=get("requests",[]);memberCount.textContent=Object.keys(m).length;requestCount.textContent=r.length;pendingCount.textContent=r.filter(x=>x.status==="En attente").length;membersTable.innerHTML=Object.entries(m).map(([id,x])=>`<tr><td>${esc(id)}</td><td>${esc(x.role)}</td><td>${x.permissions.includes("all")?"Tout":x.permissions.map(esc).join(", ")}</td><td>${id===session.id?"<span class='pill'>Compte actuel</span>":`<button class="orange" data-action="editMember" data-id="${encodeURIComponent(id)}">Modifier</button> <button class="danger" data-action="removeMember" data-id="${encodeURIComponent(id)}">Supprimer</button>`}</td></tr>`).join("")}
-document.getElementById("addMemberForm").onsubmit=e=>{e.preventDefault();if(!can("manageMembers"))return;const id=document.getElementById("newId").value.trim(),m=get("members",{});if(m[id])return toast("Cet identifiant existe déjà.");const permissions=[...document.querySelectorAll(".perm:checked")].map(x=>x.value);m[id]={password:document.getElementById("newMemberPass").value,role:document.getElementById("newRole").value.trim(),permissions};set("members",m);e.target.reset();document.querySelector('.perm[value="reply"]').checked=true;toast("Membre ajouté.");renderAdmin()};
-function editMember(enc){
-  if(!can("manageMembers")) return toast("Permission refusée.");
-  const id=decodeURIComponent(enc),m=get("members",{}),x=m[id];
-  if(!x) return toast("Membre introuvable.");
-  const perms=["reply","delete","validate","manageMembers"];
-  openModal("✏️ Modifier "+esc(id),
-    `<label>Rôle</label><input id="editRole" value="${esc(x.role)}">
-     <label>Nouveau mot de passe (facultatif)</label><input id="editPass" type="password" placeholder="Laisser vide pour conserver">
-     <label>Permissions</label>
-     <div class="grid">${perms.map(p=>`<label><input type="checkbox" class="editPerm" value="${p}" ${x.permissions.includes("all")||x.permissions.includes(p)?"checked":""}> ${p==="reply"?"Répondre":p==="delete"?"Supprimer":p==="validate"?"Valider/refuser":"Gérer les membres"}</label>`).join("")}</div>`,
-    "Enregistrer",()=>{
-      const role=document.getElementById("editRole").value.trim();
-      if(!role) return toast("Le rôle est obligatoire.");
-      const pass=document.getElementById("editPass").value;
-      const permissions=[...document.querySelectorAll(".editPerm:checked")].map(x=>x.value);
-      x.role=role;if(pass)x.password=pass;x.permissions=permissions.length===4?["all"]:permissions;
-      m[id]=x;set("members",m);
-      if(session.id===id){session.role=x.role;session.permissions=x.permissions}
-      closeModal();renderAdmin();updateUI();toast("Membre modifié.");
-    });
-}
-function removeMember(enc){
-  if(!can("manageMembers")) return toast("Permission refusée.");
-  const id=decodeURIComponent(enc);
-  openModal("🗑️ Supprimer "+esc(id),"<p>Ce membre sera retiré de l'équipe.</p>","Supprimer",()=>{
-    const m=get("members",{});delete m[id];set("members",m);closeModal();renderAdmin();toast("Membre supprimé.");
-  });
-}
-function handleAction(action,id){
-  if(action==="reply") return replyRequest(Number(id));
-  if(action==="deleteRequest") return deleteRequest(Number(id));
-  if(action==="validate") return statusRequest(Number(id),"Validée");
-  if(action==="refuse") return statusRequest(Number(id),"Refusée");
-  if(action==="editMember") return editMember(id);
-  if(action==="removeMember") return removeMember(id);
-  if(action==="closeModal") return closeModal();
-  if(action==="modalOk" && modalState) return modalState();
-}
-document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-action]");
-  if(!b) return;
-  e.preventDefault();
-  handleAction(b.dataset.action,b.dataset.id);
-});
-function updateLoginForm(){const m=document.getElementById("loginKind").value==="member";document.getElementById("memberLogin").classList.toggle("hidden",!m);document.getElementById("userLogin").classList.toggle("hidden",m)}
+async function removeMember(enc){const id=decodeURIComponent(enc);if(!can("manageMembers"))return toast("Permission refusée.");openModal("🗑️ Supprimer "+esc(id),"<p>Ce membre sera retiré de l'équipe.</p>","Supprimer",async()=>{try{await api("members?username=eq."+encodeURIComponent(id),{method:"DELETE"});closeModal();renderAdmin();toast("Membre supprimé.")}catch(err){toast(err.message)}})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-action]");if(!b)return;e.preventDefault();const a=b.dataset.action,id=b.dataset.id;if(a==="reply")replyRequest(Number(id));else if(a==="delete")deleteRequest(Number(id));else if(a==="validate")statusRequest(Number(id),"Validée");else if(a==="refuse")statusRequest(Number(id),"Refusée");else if(a==="editMember")editMember(id);else if(a==="removeMember")removeMember(id);else if(a==="closeModal")closeModal();else if(a==="modalOk"&&modalState)modalState();});
+function updateLoginForm(){const m=$("loginKind").value==="member";$("memberLogin").classList.toggle("hidden",!m);$("userLogin").classList.toggle("hidden",m);}
 function logout(){session=null;showPage("home");toast("Déconnecté.")}
-function updateClock(){document.getElementById("clock").textContent="🕒 "+new Date().toLocaleString("fr-FR",{dateStyle:"full",timeStyle:"medium"})}
-init();updateClock();setInterval(updateClock,1000);showPage("home");
+function updateClock(){$("clock").textContent="🕒 "+new Date().toLocaleString("fr-FR",{dateStyle:"full",timeStyle:"medium"});}
+setSetupNotice();updateClock();setInterval(updateClock,1000);showPage("home");
 </script>
 </body>
 </html>
