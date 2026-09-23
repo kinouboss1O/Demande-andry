@@ -1,4 +1,4 @@
-name: Déployer tout le site sur GitHub Pages
+name: Déployer le site
 
 on:
   push:
@@ -15,17 +15,22 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Télécharger le dépôt
-        uses: actions/checkout@v4
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v6
 
       - name: Configurer GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Préparer tous les fichiers
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: .
 
-      - name: Déployer tout
+      - name: Déployer sur GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
