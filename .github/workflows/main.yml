@@ -1,10 +1,9 @@
-name: Deploy static HTML to GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -12,42 +11,21 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Récupérer les fichiers
         uses: actions/checkout@v4
 
-      - name: Prepare static site
-        run: |
-          mkdir -p site
-          if [ -f "Demandes_App_FIX2.html" ]; then
-            cp "Demandes_App_FIX2.html" site/index.html
-          else
-            echo "Fichier introuvable : Demandes_App_FIX2.html"
-            exit 1
-          fi
+      - name: Configurer GitHub Pages
+        uses: actions/configure-pages@v5
 
-      - name: Upload Pages artifact
+      - name: Envoyer vers GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./site
+          path: .
 
-  deploy:
-    if: github.ref == 'refs/heads/main'
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - name: Publier
         uses: actions/deploy-pages@v4
