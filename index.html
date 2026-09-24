@@ -3,59 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>📨 Demandes — Partagé</title>
+<title>📨 Demandes — partagé</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#0b1220;color:#e5e7eb;line-height:1.5}
-header{background:#111827;padding:24px 20px;text-align:center;border-bottom:1px solid #1e293b}
-header h1{margin:0;font-size:28px;font-weight:700;letter-spacing:-0.025em}
-header p{color:#94a3b8;margin:6px 0 0;font-size:14px}
-nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:12px;background:#111827;border-bottom:1px solid #1e293b}
-button{border:0;border-radius:8px;padding:10px 16px;background:#2563eb;color:#fff;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s ease}
-button:hover{background:#1d4ed8;transform:translateY(-1px)}
-button:active{transform:translateY(0)}
-button.ok{background:#16a34a}button.ok:hover{background:#15803d}
-button.danger{background:#dc2626}button.danger:hover{background:#b91c1c}
-button.gray{background:#334155}button.gray:hover{background:#475569}
-button.orange{background:#d97706}button.orange:hover{background:#b45309}
-main{max-width:1100px;margin:auto;padding:24px 16px}
-.hidden{display:none!important}
-.card{background:#161e2e;border:1px solid #243044;border-radius:14px;padding:24px;margin-bottom:20px;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1)}
-.card h2{margin-top:0;font-size:20px;color:#f8fafc;border-bottom:1px solid #243044;padding-bottom:12px}
-label{display:block;margin:14px 0 6px;font-weight:600;font-size:14px;color:#cbd5e1}
-input,select,textarea{width:100%;padding:11px 14px;border-radius:8px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:15px;outline:0;transition:border-color .15s}
-input:focus,select:focus,textarea:focus{border-color:#3b82f6}
-textarea{min-height:110px;resize:vertical}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.actions button{flex:1;min-width:120px}
-.item{background:#0f172a;border:1px solid #243044;border-radius:10px;padding:18px;margin:14px 0}
-.badge{display:inline-block;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;background:#92400e;color:#fef3c7}
-.badge.ok{background:#166534;color:#dcfce7}
-.badge.no{background:#991b1b;color:#fee2e2}
-.small{font-size:13px;color:#94a3b8}
-.notice{background:#1e293b;border-left:4px solid #3b82f6;border-radius:6px;padding:12px 16px;margin:12px 0}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
-.stat{padding:18px;border-radius:10px;background:#0f172a;border:1px solid #243044}
-.stat b{font-size:30px;display:block;margin-top:4px;color:#3b82f6}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{padding:12px;border-bottom:1px solid #243044;text-align:left;font-size:14px}
-th{color:#93c5fd;font-weight:600}
-.pill{padding:3px 8px;border-radius:999px;background:#334155;font-size:12px}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999;backdrop-filter:blur(3px)}
-.modal.hidden{display:none}
-.modalbox{width:min(520px,100%);background:#161e2e;border:1px solid #334155;border-radius:14px;padding:24px;box-shadow:0 20px 25px -5px rgba(0,0,0,0.5)}
-.modalbox h3{margin-top:0;font-size:18px}
-.modalbox .actions{margin-top:20px}
-@media(max-width:600px){header h1{font-size:22px}main{padding:12px}.card{padding:16px}.actions{display:grid;grid-template-columns:1fr}nav button{flex:1;min-width:90px}table{font-size:13px}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#0b1220;color:#e5e7eb}
+header{background:#111827;padding:20px;text-align:center;border-bottom:1px solid #334155}header h1{margin:0;font-size:30px}header p{color:#94a3b8}
+nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px;background:#111827}
+button{border:0;border-radius:10px;padding:11px 15px;background:#2563eb;color:#fff;font-weight:bold;cursor:pointer}
+button:hover{filter:brightness(1.1)}button.ok{background:#16a34a}button.danger{background:#dc2626}button.gray{background:#475569}button.orange{background:#d97706}
+main{max-width:1100px;margin:auto;padding:18px}.hidden{display:none!important}.card{background:#172033;border:1px solid #334155;border-radius:15px;padding:20px;margin-bottom:16px}
+label{display:block;margin:12px 0 6px;font-weight:bold}input,select,textarea{width:100%;padding:12px;border-radius:9px;border:1px solid #475569;background:#0f172a;color:#fff;font-size:16px}textarea{min-height:120px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions button{flex:1;min-width:130px}.item{background:#101827;border:1px solid #475569;border-radius:12px;padding:15px;margin:12px 0}
+.badge{display:inline-block;border-radius:999px;padding:5px 9px;font-size:12px;background:#92400e}.badge.ok{background:#166534}.badge.no{background:#991b1b}
+.small{font-size:13px;color:#94a3b8}.notice{background:#172554;border:1px solid #1d4ed8;border-radius:10px;padding:12px;margin:10px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.stat{padding:18px;border-radius:12px;background:#0f172a;border:1px solid #334155}.stat b{font-size:28px;display:block;margin-top:5px}
+table{width:100%;border-collapse:collapse}th,td{padding:10px;border-bottom:1px solid #334155;text-align:left}th{color:#93c5fd}.pill{padding:4px 8px;border-radius:999px;background:#334155;font-size:12px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:18px;z-index:9999}.modal.hidden{display:none}
+.modalbox{width:min(560px,100%);background:#172033;border:1px solid #475569;border-radius:16px;padding:20px;box-shadow:0 20px 60px #0008}
+.modalbox h3{margin-top:0}.modalbox .actions{margin-top:16px}.modalbox .actions button{flex:1}
+@media(max-width:600px){header h1{font-size:24px}main{padding:10px}.card{padding:15px}.actions{display:grid;grid-template-columns:1fr}nav button{flex:1;min-width:100px}table{font-size:13px}}
 </style>
 </head>
 <body>
 <header>
 <h1>📨 Demandes</h1>
-<p>Plateforme de gestion partagée</p>
-<div id="clock" class="small" style="margin-top:8px"></div>
+<div id="clock"></div>
 </header>
-
 <nav>
 <button onclick="showPage('home')">Accueil</button>
 <button onclick="showPage('request')">Nouvelle demande</button>
@@ -63,168 +35,64 @@ th{color:#93c5fd;font-weight:600}
 <button id="adminBtn" class="hidden" onclick="showPage('admin')">⚙️ Gestion</button>
 <button id="logoutBtn" class="gray hidden" onclick="logout()">Déconnexion</button>
 </nav>
-
 <main>
 <section id="home">
-<div class="card">
-<h2>Bienvenue</h2>
-<p>Plateforme centralisée permettant d'envoyer, de suivre et de gérer vos demandes en direct.</p>
-<div class="actions">
-<button onclick="showPage('register')">📝 S'inscrire</button>
-<button onclick="showPage('login')">🔐 Se connecter</button>
-</div>
-</div>
-<div class="card">
-<h3>Équipe d'administration</h3>
-<p class="small">L'équipe dispose de droits de gestion pour répondre aux demandes et attribuer les rôles.</p>
-</div>
+<div class="card"><h2>Bienvenue</h2>
+<div id="setupNotice" class="notice"></div>
+<div class="actions"><button onclick="showPage('register')">📝 S'inscrire</button><button onclick="showPage('login')">🔐 Se connecter</button></div></div>
+<div class="card"><h3>Équipe</h3><p>Mathis et Andry ont tous les droits. Les autres membres utilisent les permissions que tu leur donnes.</p></div>
 </section>
 
-<section id="register" class="hidden">
-<div class="card">
-<h2>📝 Inscription demandeur</h2>
-<form id="registerForm">
-<label>Identifiant / Snap *</label>
-<input id="regSnap" required placeholder="@tonpseudo">
-<label>Mot de passe *</label>
-<input id="regPass" type="password" minlength="4" required>
-<label>Confirmation du mot de passe *</label>
-<input id="regPass2" type="password" minlength="4" required>
-<button type="submit" style="margin-top:16px">Créer mon compte</button>
-</form>
-</div>
-</section>
+<section id="register" class="hidden"><div class="card"><h2>📝 Inscription demandeur</h2>
+<form id="registerForm"><label>Identifiant / Snap *</label><input id="regSnap" required placeholder="@tonpseudo">
+<label>Mot de passe *</label><input id="regPass" type="password" minlength="4" required>
+<label>Confirmation *</label><input id="regPass2" type="password" minlength="4" required>
+<button type="submit">Créer mon compte</button></form>
+<p class="small">Le compte est partagé en ligne. Tu pourras ensuite retrouver tes demandes depuis un autre appareil.</p></div></section>
 
-<section id="request" class="hidden">
-<div class="card">
-<h2>📨 Nouvelle demande</h2>
-<form id="requestForm">
-<label>Identifiant / Snap *</label>
-<input id="reqSnap" required>
-<label>Type de demande *</label>
-<select id="reqType" required>
-<option value="">Choisir...</option>
-<option>Question</option>
-<option>Rendez-vous</option>
-<option>Autre</option>
-</select>
-<label>Sujet / Détails *</label>
-<textarea id="reqQuestion" required></textarea>
-<label>Date souhaitée *</label>
-<input id="reqDate" type="date" required>
-<label>Lieu <span class="small">(optionnel)</span></label>
-<input id="reqLieu">
-<button type="submit" style="margin-top:16px">Envoyer la demande</button>
-</form>
-</div>
-</section>
+<section id="request" class="hidden"><div class="card"><h2>📨 Nouvelle demande</h2><div id="requestNotice" class="notice"></div>
+<form id="requestForm"><label>Identifiant / Snap *</label><input id="reqSnap" required>
+<label>Type *</label><select id="reqType" required><option value="">Choisir...</option><option>Question</option><option>Rendez-vous</option><option>Autre</option></select>
+<label>Question / sujet *</label><textarea id="reqQuestion" required></textarea>
+<label>Date souhaitée *</label><input id="reqDate" type="date" required>
+<label>Lieu <span class="small">(optionnel)</span></label><input id="reqLieu">
+<button type="submit">Envoyer la demande</button></form></div></section>
 
-<section id="login" class="hidden">
-<div class="card">
-<h2>🔐 Connexion</h2>
-<label>Type de compte</label>
-<select id="loginKind" onchange="updateLoginForm()">
-<option value="member">Membre de l'équipe</option>
-<option value="user">Demandeur</option>
-</select>
-<div id="memberLogin" style="margin-top:12px">
-<form id="memberForm">
-<label>Identifiant</label>
-<input id="memberId" required>
-<label>Mot de passe</label>
-<input id="memberPass" type="password" required>
-<button style="margin-top:16px">Connexion équipe</button>
-</form>
-</div>
-<div id="userLogin" class="hidden" style="margin-top:12px">
-<form id="userForm">
-<label>Identifiant / Snap</label>
-<input id="loginSnap" required>
-<label>Mot de passe</label>
-<input id="loginPass" type="password" required>
-<button style="margin-top:16px">Connexion demandeur</button>
-</form>
-</div>
-</div>
-</section>
+<section id="login" class="hidden"><div class="card"><h2>🔐 Connexion</h2>
+<select id="loginKind" onchange="updateLoginForm()"><option value="member">Membre de l'équipe</option><option value="user">Demandeur</option></select>
+<div id="memberLogin"><form id="memberForm"><label>Identifiant</label><input id="memberId" required><label>Mot de passe</label><input id="memberPass" type="password" required><button>Connexion équipe</button></form></div>
+<div id="userLogin" class="hidden"><form id="userForm"><label>Identifiant / Snap</label><input id="loginSnap" required><label>Mot de passe</label><input id="loginPass" type="password" required><button>Connexion demandeur</button></form></div>
+</div></section>
 
-<section id="dashboard" class="hidden">
-<div class="card">
-<h2>📋 Espace personnel</h2>
-<p id="identity"></p>
-<button class="gray" onclick="openChangePasswordModal()" style="margin-top:10px">🔐 Modifier mon mot de passe</button>
-</div>
-<div class="card">
-<h2 id="listTitle">Mes demandes</h2>
-<div id="list"></div>
-</div>
-</section>
+<section id="dashboard" class="hidden"><div class="card"><h2>📋 Espace personnel</h2><p id="identity"></p></div>
+<div class="card"><h2 id="listTitle">Mes demandes</h2><div id="list"></div></div></section>
 
-<section id="admin" class="hidden">
-<div class="card">
-<h2>⚙️ Gestion globale</h2>
-<div class="grid">
-<div class="stat">Membres <b><span id="memberCount">0</span></b></div>
-<div class="stat">Demandeurs <b><span id="userCount">0</span></b></div>
-<div class="stat">Demandes <b><span id="requestCount">0</span></b></div>
-<div class="stat">En attente <b><span id="pendingCount">0</span></b></div>
-</div>
-</div>
-
-<div class="card">
-<h2>➕ Ajouter un membre d'équipe</h2>
-<form id="addMemberForm">
-<label>Identifiant</label><input id="newId" required>
-<label>Mot de passe</label><input id="newMemberPass" minlength="4" required>
-<label>Rôle</label><input id="newRole" required>
-<label>Permissions</label>
-<div class="grid" style="margin-top:8px">
-<label><input type="checkbox" class="perm" value="reply" checked> Répondre</label>
+<section id="admin" class="hidden"><div class="card"><h2>⚙️ Gestion de l'équipe</h2><p id="adminInfo"></p>
+<div class="grid"><div class="stat">Membres <b id="memberCount">0</b></div><div class="stat">Demandes <b id="requestCount">0</b></div><div class="stat">En attente <b id="pendingCount">0</b></div></div></div>
+<div class="card"><h2>➕ Ajouter une personne</h2><form id="addMemberForm">
+<label>Identifiant</label><input id="newId" required><label>Mot de passe</label><input id="newMemberPass" minlength="4" required>
+<label>Rôle</label><input id="newRole" required><label>Permissions</label>
+<div class="grid"><label><input type="checkbox" class="perm" value="reply" checked> Répondre</label>
 <label><input type="checkbox" class="perm" value="delete"> Supprimer</label>
 <label><input type="checkbox" class="perm" value="validate"> Valider/refuser</label>
-<label><input type="checkbox" class="perm" value="manageMembers"> Gérer l'équipe</label>
-</div>
-<button type="submit" style="margin-top:16px">Ajouter le membre</button>
-</form>
-</div>
-
-<div class="card">
-<h2>👥 Membres de l'équipe</h2>
-<div style="overflow:auto">
-<table>
-<thead><tr><th>Identifiant</th><th>Rôle</th><th>Permissions</th><th>Actions</th></tr></thead>
-<tbody id="membersTable"></tbody>
-</table>
-</div>
-</div>
-
-<div class="card">
-<h2>👤 Demandeurs (Inscrits)</h2>
-<div style="overflow:auto">
-<table>
-<thead><tr><th>Identifiant</th><th>Inscrit le</th><th>Actions</th></tr></thead>
-<tbody id="usersTable"></tbody>
-</table>
-</div>
-</div>
+<label><input type="checkbox" class="perm" value="manageMembers"> Gérer les membres</label></div>
+<button type="submit">Ajouter la personne</button></form></div>
+<div class="card"><h2>👥 Membres et rôles</h2><div style="overflow:auto"><table><thead><tr><th>Identifiant</th><th>Rôle</th><th>Permissions</th><th>Actions</th></tr></thead><tbody id="membersTable"></tbody></table></div></div>
 </section>
 </main>
 
-<div id="modal" class="modal hidden">
-<div class="modalbox">
-<h3 id="modalTitle">Action</h3>
-<div id="modalBody"></div>
-<div class="actions">
-<button class="gray" data-action="closeModal">Annuler</button>
-<button id="modalOk" class="ok" data-action="modalOk">Confirmer</button>
-</div>
-</div>
-</div>
-
-<div id="toast" style="position:fixed;bottom:20px;right:20px;display:none;background:#1e293b;border:1px solid #475569;padding:12px 18px;border-radius:10px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.3);z-index:10000"></div>
+<div id="modal" class="modal hidden"><div class="modalbox"><h3 id="modalTitle">Action</h3><div id="modalBody"></div><div class="actions">
+<button class="gray" data-action="closeModal">Annuler</button><button id="modalOk" class="ok" data-action="modalOk">Confirmer</button></div></div></div>
+<div id="toast" style="position:fixed;bottom:20px;right:20px;display:none;background:#111827;border:1px solid #475569;padding:13px 16px;border-radius:10px"></div>
 
 <script src="config.js"></script>
 <script>
+/*
+  IMPORTANT:
+  1) Create a Supabase project.
+  2) Run supabase.sql in Supabase > SQL Editor.
+  3) Put your Supabase URL and anon key in config.js.
+*/
 const SUPABASE_URL = window.DEMANDES_CONFIG?.url || "";
 const SUPABASE_ANON_KEY = window.DEMANDES_CONFIG?.anonKey || "";
 let session = null;
@@ -235,7 +103,7 @@ const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",
 function configured(){ return /^https:\/\/.+\.supabase\.co$/.test(SUPABASE_URL) && SUPABASE_ANON_KEY.length>20; }
 function headers(){ return {"apikey":SUPABASE_ANON_KEY,"Authorization":"Bearer "+SUPABASE_ANON_KEY,"Content-Type":"application/json","Prefer":"return=representation"}; }
 async function api(path, options={}){
-  if(!configured()) throw new Error("Configuration Supabase manquante.");
+  if(!configured()) throw new Error("Supabase non configuré.");
   const r=await fetch(SUPABASE_URL+"/rest/v1/"+path,{...options,headers:{...headers(),...(options.headers||{})}});
   const txt=await r.text(); let data=null; try{data=txt?JSON.parse(txt):null}catch{}
   if(!r.ok) throw new Error(data?.message||data?.error_description||txt||("HTTP "+r.status));
@@ -246,19 +114,21 @@ function toast(s){const t=$("toast");t.textContent=s;t.style.display="block";set
 function showPage(id){document.querySelectorAll("main>section").forEach(x=>x.classList.add("hidden"));$(id).classList.remove("hidden");updateUI();if(id==="dashboard")render();if(id==="admin")renderAdmin();if(id==="request")prepareRequest();}
 function can(p){return session?.type==="team" && (session.permissions.includes("all")||session.permissions.includes(p));}
 function updateUI(){$("logoutBtn").classList.toggle("hidden",!session);$("dashBtn").classList.toggle("hidden",!session);$("adminBtn").classList.toggle("hidden",!can("manageMembers"));}
-function prepareRequest(){const i=$("reqSnap");if(session?.type==="user"){i.value=session.id;i.readOnly=true;}else{i.readOnly=false;}}
+function prepareRequest(){const n=$("requestNotice"),i=$("reqSnap");if(session?.type==="user"){i.value=session.id;i.readOnly=true;n.textContent="Connecté avec "+session.id+"."}else{i.readOnly=false;n.textContent="Tu peux envoyer une demande avec ton identifiant de compte."}}
+function setSetupNotice(){$("setupNotice").innerHTML=configured()?"✅ Base en ligne configurée. Les demandes sont partagées entre les appareils.":"⚠️ Configure d'abord <b>config.js</b> avec l'URL et la clé anon de Supabase.";}
 
+/* Accounts */
 async function getMember(id){const a=await api("members?select=*&username=eq."+encodeURIComponent(id)+"&limit=1");return a?.[0]||null;}
 async function getUser(id){const a=await api("users?select=*&username=eq."+encodeURIComponent(id)+"&limit=1");return a?.[0]||null;}
 
 $("registerForm").onsubmit=async e=>{
- e.preventDefault();
+ e.preventDefault(); if(!configured())return toast("Configure Supabase d'abord.");
  const id=$("regSnap").value.trim(),p=$("regPass").value,p2=$("regPass2").value;
  if(p!==p2)return toast("Les mots de passe ne correspondent pas.");
  try{
    if(await getUser(id)) return toast("Cet identifiant existe déjà.");
    await api("users",{method:"POST",body:JSON.stringify({username:id,password_hash:await sha256(p)})});
-   session={type:"user",id};toast("Compte créé avec succès !");showPage("dashboard");
+   session={type:"user",id};toast("Compte créé !");showPage("dashboard");
  }catch(err){toast(err.message)}
 };
 
@@ -279,7 +149,7 @@ $("memberForm").onsubmit=async e=>{
 };
 
 $("requestForm").onsubmit=async e=>{
- e.preventDefault();
+ e.preventDefault();if(!configured())return toast("Configure Supabase d'abord.");
  const id=$("reqSnap").value.trim();
  try{
    if(!await getUser(id))return toast("Ce compte demandeur n'existe pas.");
@@ -292,38 +162,28 @@ async function loadRequests(){
  const q=session?.type==="user"?"&snap=eq."+encodeURIComponent(session.id):"";
  return await api("requests?select=*&order=created_at.desc"+q);
 }
-
 async function render(){
  if(!session)return;
  try{
-   const list=await loadRequests();
-   $("identity").textContent=session.type==="user"?"👤 Demandeur : "+session.id:"👤 Équipe : "+session.id+" ("+session.role+")";
+   const list=await loadRequests();$("identity").textContent=session.type==="user"?"👤 Demandeur : "+session.id:"👤 Équipe : "+session.id+" — "+session.role;
    $("listTitle").textContent=session.type==="user"?"Mes demandes":"Toutes les demandes";
    $("list").innerHTML=list.length?list.map(r=>`<div class="item"><span class="badge ${r.status==="Validée"?"ok":r.status==="Refusée"?"no":""}">${esc(r.status)}</span>
    <p><b>Snap :</b> ${esc(r.snap)}</p><p><b>Type :</b> ${esc(r.type)}</p><p><b>Sujet :</b><br>${esc(r.question)}</p>
    <p><b>Date :</b> ${esc(r.date)}${r.lieu?"<br><b>Lieu :</b> "+esc(r.lieu):""}</p>
    <p class="small">Envoyée le ${esc(new Date(r.created_at).toLocaleString("fr-FR"))}</p>
-   ${r.reply?`<div class="notice"><b>💬 Réponse de ${esc(r.reply_by\vert{}\vert{}"l'équipe")} :</b><br>${esc(r.reply)}</div>`:""}
+   ${r.reply?`<div class="notice"><b>💬 Réponse de ${esc(r.reply_by||"équipe")} :</b><br>${esc(r.reply)}</div>`:""}
    ${session.type==="team"?`<div class="actions">${can("reply")?`<button data-action="reply" data-id="${r.id}">💬 Répondre</button>`:""}${can("delete")?`<button class="gray" data-action="delete" data-id="${r.id}">🗑️ Supprimer</button>`:""}${can("validate")?`<button class="ok" data-action="validate" data-id="${r.id}">✅ Valider</button><button class="danger" data-action="refuse" data-id="${r.id}">❌ Refuser</button>`:""}</div>`:""}
-   </div>`).join(""):"<p class='small'>Aucune demande enregistrée.</p>";
+   </div>`).join(""):"<p>Aucune demande.</p>";
  }catch(err){$("list").innerHTML="<p>Erreur : "+esc(err.message)+"</p>";}
 }
-
 async function renderAdmin(){
  if(!can("manageMembers"))return;
  try{
-  const m=await api("members?select=*&order=username"), r=await api("requests?select=id,status"), u=await api("users?select=*&order=created_at.desc");
-  $("memberCount").textContent=m.length;
-  $("userCount").textContent=u.length;
-  $("requestCount").textContent=r.length;
-  $("pendingCount").textContent=r.filter(x=>x.status==="En attente").length;
-  
+  const m=await api("members?select=*&order=username"),r=await api("requests?select=id,status");
+  $("memberCount").textContent=m.length;$("requestCount").textContent=r.length;$("pendingCount").textContent=r.filter(x=>x.status==="En attente").length;
   $("membersTable").innerHTML=m.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(x.role)}</td><td>${x.permissions?.includes("all")?"Tout":(x.permissions||[]).map(esc).join(", ")}</td><td>${x.username===session.id?"<span class='pill'>Compte actuel</span>":`<button class="orange" data-action="editMember" data-id="${encodeURIComponent(x.username)}">Modifier</button> <button class="danger" data-action="removeMember" data-id="${encodeURIComponent(x.username)}">Supprimer</button>`}</td></tr>`).join("");
-  
-  $("usersTable").innerHTML=u.map(x=>`<tr><td>${esc(x.username)}</td><td>${esc(new Date(x.created_at).toLocaleDateString("fr-FR"))}</td><td><button class="orange" data-action="editUserPass" data-id="${encodeURIComponent(x.username)}">🔑 Modifier mot de passe</button> <button class="danger" data-action="removeUser" data-id="${encodeURIComponent(x.username)}">Supprimer</button></td></tr>`).join("");
  }catch(err){toast(err.message)}
 }
-
 $("addMemberForm").onsubmit=async e=>{
  e.preventDefault();if(!can("manageMembers"))return;
  const id=$("newId").value.trim(),pass=$("newMemberPass").value,role=$("newRole").value.trim(),permissions=[...document.querySelectorAll(".perm:checked")].map(x=>x.value);
@@ -332,41 +192,6 @@ $("addMemberForm").onsubmit=async e=>{
 
 function openModal(title,body,ok,cb){$("modalTitle").textContent=title;$("modalBody").innerHTML=body;$("modalOk").textContent=ok;$("modal").classList.remove("hidden");modalState=cb;}
 function closeModal(){$("modal").classList.add("hidden");modalState=null;}
-
-function openChangePasswordModal(){
- openModal("🔐 Modifier mon mot de passe",'<label>Nouveau mot de passe</label><input id="newMyPass" type="password" minlength="4" required>','Enregistrer',async()=>{
-   const pass=$("newMyPass").value; if(!pass||pass.length<4) return toast("Mot de passe trop court.");
-   try{
-     const hash = await sha256(pass);
-     if(session.type==="user"){
-       await api("users?username=eq."+encodeURIComponent(session.id),{method:"PATCH",body:JSON.stringify({password_hash:hash})});
-     }else{
-       await api("members?username=eq."+encodeURIComponent(session.id),{method:"PATCH",body:JSON.stringify({password_hash:hash})});
-     }
-     closeModal();toast("Mot de passe modifié avec succès.");
-   }catch(err){toast(err.message)}
- });
-}
-
-async function editUserPass(enc){
- const id=decodeURIComponent(enc);
- openModal("🔑 Mot de passe de "+esc(id),'<label>Nouveau mot de passe pour le demandeur</label><input id="newUserPass" type="password" minlength="4" required>','Modifier',async()=>{
-   const pass=$("newUserPass").value; if(!pass||pass.length<4) return toast("Mot de passe trop court.");
-   try{
-     await api("users?username=eq."+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify({password_hash:await sha256(pass)})});
-     closeModal();toast("Mot de passe mis à jour.");
-   }catch(err){toast(err.message)}
- });
-}
-
-async function removeUser(enc){
- const id=decodeURIComponent(enc);
- if(!can("manageMembers"))return toast("Permission refusée.");
- openModal("🗑️ Supprimer le demandeur "+esc(id),"<p>Attention : le compte sera supprimé définitivement.</p>","Supprimer",async()=>{
-  try{await api("users?username=eq."+encodeURIComponent(id),{method:"DELETE"});closeModal();renderAdmin();toast("Demandeur supprimé.")}catch(err){toast(err.message)}
- });
-}
-
 async function replyRequest(id){
  if(!can("reply"))return toast("Permission refusée.");
  openModal("💬 Répondre à la demande",'<label>Réponse</label><textarea id="modalText"></textarea>','Envoyer',async()=>{
@@ -374,41 +199,23 @@ async function replyRequest(id){
    try{await api("requests?id=eq."+id,{method:"PATCH",body:JSON.stringify({reply:msg,reply_by:session.id})});closeModal();render();toast("Réponse envoyée.")}catch(err){toast(err.message)}
  });
 }
-
-async function statusRequest(id,status){if(!can("validate"))return toast("Permission refusée.");try{await api("requests?id=eq."+id,{method:"PATCH",body:JSON.stringify({status})});render();toast("Demande "+status.toLowerCase())}catch(err){toast(err.message)}}
+async function statusRequest(id,status){if(!can("validate"))return toast("Permission refusée.");try{await api("requests?id=eq."+id,{method:"PATCH",body:JSON.stringify({status})});render();toast(status)}catch(err){toast(err.message)}}
 async function deleteRequest(id){if(!can("delete"))return toast("Permission refusée.");openModal("🗑️ Supprimer","<p>Cette demande sera supprimée définitivement.</p>","Supprimer",async()=>{try{await api("requests?id=eq."+id,{method:"DELETE"});closeModal();render();toast("Demande supprimée.")}catch(err){toast(err.message)}})}
-
 async function editMember(enc){
  const id=decodeURIComponent(enc);const m=await getMember(id);if(!m)return toast("Membre introuvable.");
  const perms=["reply","delete","validate","manageMembers"];
- openModal("✏️ Modifier "+esc(id),`<label>Rôle</label><input id="editRole" value="${esc(m.role)}"><label>Nouveau mot de passe (facultatif)</label><input id="editPass" type="password"><label>Permissions</label><div class="grid">${perms.map(p=>`<label><input type="checkbox" class="editPerm" value="${p}" ${m.permissions?.includes("all")\vert{}\vert{}m.permissions?.includes(p)?"checked":""}> ${p}</label>`).join("")}</div>`,"Enregistrer",async()=>{
+ openModal("✏️ Modifier "+esc(id),`<label>Rôle</label><input id="editRole" value="${esc(m.role)}"><label>Nouveau mot de passe (facultatif)</label><input id="editPass" type="password"><label>Permissions</label><div class="grid">${perms.map(p=>`<label><input type="checkbox" class="editPerm" value="${p}" ${m.permissions?.includes("all")||m.permissions?.includes(p)?"checked":""}> ${p}</label>`).join("")}</div>`,"Enregistrer",async()=>{
   const role=$("editRole").value.trim();if(!role)return toast("Le rôle est obligatoire.");
   const pass=$("editPass").value,permissions=[...document.querySelectorAll(".editPerm:checked")].map(x=>x.value);const body={role,permissions:permissions.length===4?["all"]:permissions};if(pass)body.password_hash=await sha256(pass);
   try{await api("members?username=eq."+encodeURIComponent(id),{method:"PATCH",body:JSON.stringify(body)});if(session.id===id){session.role=role;session.permissions=body.permissions}closeModal();renderAdmin();updateUI();toast("Membre modifié.")}catch(err){toast(err.message)}
  });
 }
-
 async function removeMember(enc){const id=decodeURIComponent(enc);if(!can("manageMembers"))return toast("Permission refusée.");openModal("🗑️ Supprimer "+esc(id),"<p>Ce membre sera retiré de l'équipe.</p>","Supprimer",async()=>{try{await api("members?username=eq."+encodeURIComponent(id),{method:"DELETE"});closeModal();renderAdmin();toast("Membre supprimé.")}catch(err){toast(err.message)}})}
-
-document.addEventListener("click",e=>{
- const b=e.target.closest("[data-action]");if(!b)return;e.preventDefault();
- const a=b.dataset.action,id=b.dataset.id;
- if(a==="reply")replyRequest(Number(id));
- else if(a==="delete")deleteRequest(Number(id));
- else if(a==="validate")statusRequest(Number(id),"Validée");
- else if(a==="refuse")statusRequest(Number(id),"Refusée");
- else if(a==="editMember")editMember(id);
- else if(a==="removeMember")removeMember(id);
- else if(a==="editUserPass")editUserPass(id);
- else if(a==="removeUser")removeUser(id);
- else if(a==="closeModal")closeModal();
- else if(a==="modalOk"&&modalState)modalState();
-});
-
+document.addEventListener("click",e=>{const b=e.target.closest("[data-action]");if(!b)return;e.preventDefault();const a=b.dataset.action,id=b.dataset.id;if(a==="reply")replyRequest(Number(id));else if(a==="delete")deleteRequest(Number(id));else if(a==="validate")statusRequest(Number(id),"Validée");else if(a==="refuse")statusRequest(Number(id),"Refusée");else if(a==="editMember")editMember(id);else if(a==="removeMember")removeMember(id);else if(a==="closeModal")closeModal();else if(a==="modalOk"&&modalState)modalState();});
 function updateLoginForm(){const m=$("loginKind").value==="member";$("memberLogin").classList.toggle("hidden",!m);$("userLogin").classList.toggle("hidden",m);}
 function logout(){session=null;showPage("home");toast("Déconnecté.")}
 function updateClock(){$("clock").textContent="🕒 "+new Date().toLocaleString("fr-FR",{dateStyle:"full",timeStyle:"medium"});}
-updateClock();setInterval(updateClock,1000);showPage("home");
+setSetupNotice();updateClock();setInterval(updateClock,1000);showPage("home");
 </script>
 </body>
 </html>
